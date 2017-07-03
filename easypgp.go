@@ -23,6 +23,24 @@ func NewKeyPairWithKeys(pubkey string, privkey string) *KeyPair {
 	}
 }
 
+func Encrypt(message string, recepient *KeyPair) (*EncryptedMessage, error) {
+	recepient_entity, err := createEntityFromKeyPair(recepient, false)
+	if err != nil {
+		return nil, err
+	}
+
+	cipher, err := encryptRaw(message, recepient_entity)
+	if err != nil {
+		return nil, err
+	}
+
+	return &EncryptedMessage{
+		Content: &CipherWithSignature{
+			Cipher: cipher,
+		},
+	}, nil
+}
+
 func EncryptAndSign(message string, recepient *KeyPair, sender *KeyPair) (*EncryptedMessage, error) {
 	recepient_entity, err := createEntityFromKeyPair(recepient, false)
 	if err != nil {
