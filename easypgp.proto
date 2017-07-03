@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package easypgp;
+
+message CipherWithSignature {
+  string cipher = 1;
+  string signature = 2;
+}
+
+message EncryptedMessage {
+  CipherWithSignature content = 1;
+  string sender_pubkey = 2;
+  uint64 timestamp = 3;
+}
+
+message DecryptedMessage {
+  string text = 1;
+  bool signature_ok = 2;
+}

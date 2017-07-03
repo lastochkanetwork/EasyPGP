@@ -70,8 +70,8 @@ func decryptRaw(cipher string, entity *openpgp.Entity) (string, error) {
 	return plaintext_buf.String(), err
 }
 
-func (msg EncryptedMessage) VerifySignature() (bool, error) {
-	sender_entity, err := createEntityFromKeyPair(&KeyPair{Pubkey: msg.SenderPubkey}, false)
+func (msg EncryptedMessage) VerifySignatureAgainst(pubkey string) (bool, error) {
+	sender_entity, err := createEntityFromKeyPair(&KeyPair{Pubkey: pubkey}, false)
 	if err != nil {
 		return false, err
 	}
@@ -83,7 +83,7 @@ func (msg EncryptedMessage) VerifySignature() (bool, error) {
 	}
 
 	hash := sig.Hash.New()
-	io.Copy(hash, bytes.NewReader([]byte(msg.Cipher)))
+	io.Copy(hash, bytes.NewReader([]byte(msg.Content.Cipher)))
 
 	err = pubKey.VerifySignature(hash, sig)
 	if err != nil {
@@ -93,8 +93,12 @@ func (msg EncryptedMessage) VerifySignature() (bool, error) {
 
 }
 
+func (msg EncryptedMessage) VerifySignature() (bool, error) {
+	return msg.VerifySignatureAgainst(msg.SenderPubkey)
+}
+
 func (msg EncryptedMessage) signaturePacket() (*packet.Signature, error) {
-	in := bytes.NewReader([]byte(msg.Signature))
+	in := bytes.NewReader([]byte(msg.Content.Signature))
 
 	block, err := armor.Decode(in)
 	if err != nil {

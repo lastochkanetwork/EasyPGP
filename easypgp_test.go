@@ -11,31 +11,42 @@ const (
 	privkey2 = "-----BEGIN PGP PRIVATE KEY BLOCK-----\n\nlQOYBFkLOz0BCADO/Sv/iRWaJvBqFv+RCzkWGLO2B2l1v5fswKh3FXojZnvBkPDo\nrpRt4tL2f604pOYOcFRKaQUuJECBS3YDFWqr4vDXt//tvTwmY5gYFOgzt4p8opvK\naUljzGc07dERclsAidyTXAz5qolT2F2Ed6odJcCS5m5oYziMSEMJW+kweUR27VRD\npi0utXV7zeafKUdoLTwadXD0YRETX7hFmCWaJI4blISHOC82rKN2UNvWRCf5zSie\nXuu23xoz0JqPEVDBeae0S3gbZ+JbwFEdVOcPsovw/oesjx3EpcKpMHrSBAjU7000\neBBHPkqAs/ZblmhzHvnCJB4CbK5ZKXLo8AvpABEBAAEAB/kBBShpWwCbQOPgcfqS\neW6vmDGSjRjM9sPF6/EonRd8Ay5K9u7pBqs+m2aUxm5RICbuHUmdEEVxQ8Z5nKiZ\nPUrITBcJySNexZb9TXJbdAbs8lOhZ5/C8J/m+QPtM9ra7ihaqVNH+qUpudhxbFiR\npZFWEXCQiMg0hYCq2FRUQHq2vW/+kNslUcxY4zb93fohPYVNIBjBE4HNrTLw/Riu\nv9C5uv1tVmsG3REaOHAtCPmML/KSaAeYbFRK9EjA7d0k5qTR1D1+JwIs4VZrk3Ru\nalm3/b/ktxTFN0WczESzOPbKwu8WKuOGTBfwSDkpYud70FAEDJdldYjmjqy7OWfk\n1ZuxBADc1n7eh3WQnky2efro3NI07J2BmRAbW8OlTiNxLtunAg0nf22XSbrVtfeN\nChWNZKGLGBN3mEUsQWxh8GPxAabCsEGv6+4Co51Imoc832WOTz0fcKHr6iaN05Im\nNWtEIEjI9KbMkltmkeZeuY1so0NDLJ7o5HuR9BLzK4yc0OeMPQQA7/IvSGtkZIpq\nbU66bIvuBhUBKVQDJrBj3cBzObzIAbplvYh15RdfQkpiWJ+hFgsAU69REian183C\nNVH+b+GYvtTvlscs2jZk6d9wjZuhkYvHJmMOjUH6h/XtLE+UEBNvSIOSdJjnX7Oh\nRzubJhRspJenV11RFE4XuBaE9zD/XR0EALFAti27bu/v42iBVoSlM5izOGC34Epo\n1RYDEt/TWl0tKmcw7bYk4tibL/js/dIscCAVS38fKs/ThMGeQjghImI4/hJFD7e+\n+o80xE+RbeaGqgrU6WyxTwxg5xUO1ZYQdSLFkHXjybYpaI8QSUpgYsX2lRp3xMG7\namTiNI4o4Lf3QhK0CnRlc3Qga2V5IDKJAVQEEwEIAD4WIQT4NAOiA59iibo96Owf\n1XMBhn8o2wUCWQs7PQIbAwUJA8JnAAULCQgHAgYVCAkKCwIEFgIDAQIeAQIXgAAK\nCRAf1XMBhn8o29bCB/9K9Kgi0ZRqHIbTxoyVLeZdunA/5BHKBMghnFB2pi2ij9fg\n+IY/KwVimG8WOR275OLe7+OtYLWrdmuW4Xn8ueUTOhoNEt16N+2Pzj202QuI7o7q\n3eAaJbsMm0zueZURwemKlZPkxs2Qf7EQXZTLr6z7/aeCEeReRXTs9WxqUmPOgvZl\nGW9/aXmo4RPrn7FtXYzd+3Nvg9KM6gF06wBq1HimaaV+ADbbfFA5J4aF4DGnJnOB\npWzRbCVpKqUcFEd9oA7mfCRMbp3bCzS4kVRHme7SyQh+L4Nqo1tqpWMWLyrwi5Jw\nC9vF76alBZW2o0aObgBovW3FJj+bypqWPzQd7ceonQOYBFkLOz0BCACxvET935Qf\nIE2zm/mnNN9UUOF6FogP5K22WvfxjGzYFyhRuQvssTuXP/pwHmsW/X6sOBBQ3W/9\nHuZ34PwwR15PEtgoCmrwwkJTwYwbSZLXO655wU9hWiX07fQ+aagWbhWfuVPI02N3\nnBqoV0GW3EcVT9ZDYriVMiPJHXkNKTLqBngY4jAqiTLW9+nzXtxyYsiYtevo7v8g\n/fHggnJlgOVTMyJfS+aDMZbsmz0zpUqESVRnJ+Dt7xQJWdEKLe+OFPVeoyr5iDzp\nOS88XIFWL9PehBp4skEol6qeaSjE80xOIbfUQASjp5ltwF8idE40tLPGPTyBh1nl\nYHsDVl/LKkIhABEBAAEAB/oDEBtUQ+OALp6ILadXJVPpid2vRlVT7zBUx/glfOXU\nF4B4+apl8TjCRraT8tvZMPpbRDmrwXuQYVVX0+2+QaYzaj/rxYb9EF8nC447J8DU\nqrehnrfPSRSfku/P/4jt0gakLDc9N79eeVDQSkJCgLGzTh8c8pLIJ22mDDb6bhWH\nIn83JAWZBM0rb8zgf5YxDlE5g3Zs2hTRVNME1IndzYYQpD6p/LoKmPT1X4LFkVFq\ncFzJEjzMp8IafKC0s99xxw7QVBI0/q/5kkGkm9TzkVq+Eprra+uRgT/Gefmnf4aw\nIpcFIudhDK8C/HDcppQz60GtVvVzbduHtmA2Bm0exMY9BADAvBu0M388zCm+hEak\nRQWuHPyYaSIMNeB49B8hAiD6ZGozcOwW++FGaZ2UGSiPMKweEwzUyfXwmDgutDK1\nyzuEs8l33eMciQ69mzgb/7/vN0qB2hP/lPMpKQX5V4eFaip7HYmpQc3Kb8bw31M1\nmDPCIdjqe6raz4ciEcttPEnvQwQA7BO773dhDMqHYLlh3dE4gDSTThQb0F8GLpvi\ngK9EBaRpniOZJsSa/T/V9e0trGBQANO3EgNMEDXOFehS3izoRCcXUqsDsxudLjQN\nVHk6vKmjuW9qqydKdF+6pl3gPhrBtUXkzEYjPEath/Ibx6sWdKhfhGQ4woyCR073\noAGj2MsEAOXZ/gm+P5sHOnvjhUN04TV7S1t9vJmZ0B+OjUHqxSpReC20eZ/klwy1\nAw6solLlDvy1/WEIXVHNOxNpRxYL5WatFd/2fR/pZeLdqiUFBQNq3xVLklV1v/iY\nUR1H45dl2hR8KcX6CVI+sHHfkq0u08vgAsetg8jotYldaP+oTeBuPg+JATwEGAEI\nACYWIQT4NAOiA59iibo96Owf1XMBhn8o2wUCWQs7PQIbDAUJA8JnAAAKCRAf1XMB\nhn8o21k1B/9npFnxDQdQA9P+YPQ3/NLKPt+Hz9a7CQmXHhaUu4JY68j3ukCvK2EH\nt7/3jO3km1SJz60qZs/mzfEVd9jq6B8QMk2NLQ/9at2TJ59VX7bkqoe9mEjzDSSo\nV+3GqGmXOYT8964psI+F1JnifXmp+wV1QxWxBQqZ//n6qzMH5upozaaMAvHIH+Ez\nOTAYJZjQ9rde8OkJo/cHNCCmvSJ6jLkm8p3pPU31G5MWNgpTuuY+mABA6Qjns4+f\nQhfUZ/OQxacM7Gb8v9ue/HS3fqKgrQKgzOWpUacBtCeeI4wJaytlsMfj4Ar21hkA\ncjbeCm+yG/Xai3YBcGKptD8FGd4MzDLV\n=FsP6\n-----END PGP PRIVATE KEY BLOCK-----\n"
 )
 
+func checkError(err error, t *testing.T) {
+	if err != nil {
+		t.Fail()
+	}
+}
+
 func TestEncryptDecrypt(t *testing.T) {
 	sender_keypair := &KeyPair{Pubkey: pubkey1, Privkey: privkey1}
 	recepient_keypair := &KeyPair{Pubkey: pubkey2}
 	recepient_keypair_with_privkey := &KeyPair{Pubkey: pubkey2, Privkey: privkey2}
 
 	enc_msg, err := EncryptAndSign(message, recepient_keypair, sender_keypair)
-	if err != nil {
+	checkError(err, t)
+
+	sig_ok, err := enc_msg.VerifySignature()
+	checkError(err, t)
+	if !sig_ok {
+		t.Fail()
+	}
+
+	sig_ok, err = enc_msg.VerifySignatureAgainst(pubkey2)
+	if sig_ok || err == nil {
 		t.Fail()
 	}
 
 	decrypted, err := DecryptAndVerify(enc_msg, recepient_keypair_with_privkey)
-	if err != nil {
-		t.Fail()
-	}
+	checkError(err, t)
 
 	if decrypted.Text != message {
 		t.Fail()
 	}
 
-	if !decrypted.SignatureVerified {
+	if !decrypted.SignatureOk {
 		t.Fail()
 	}
 
 	_, err = GenerateKeyPair()
-	if err != nil {
-		t.Fail()
-	}
+	checkError(err, t)
 }

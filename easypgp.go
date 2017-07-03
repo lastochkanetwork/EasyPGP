@@ -1,15 +1,15 @@
 package easypgp
 
-type EncryptedMessage struct {
-	Cipher       string
-	Signature    string
-	SenderPubkey string
-}
+// type EncryptedMessage struct {
+// 	Cipher       string
+// 	Signature    string
+// 	SenderPubkey string
+// }
 
-type DecryptedMessage struct {
-	Text              string
-	SignatureVerified bool
-}
+// type DecryptedMessage struct {
+// 	Text              string
+// 	SignatureVerified bool
+// }
 
 type KeyPair struct {
 	Pubkey  string
@@ -44,8 +44,10 @@ func EncryptAndSign(message string, recepient *KeyPair, sender *KeyPair) (*Encry
 	}
 
 	return &EncryptedMessage{
-		Cipher:       cipher,
-		Signature:    signature,
+		Content: &CipherWithSignature{
+			Cipher:    cipher,
+			Signature: signature,
+		},
 		SenderPubkey: sender.Pubkey,
 	}, nil
 }
@@ -70,7 +72,7 @@ func DecryptAndVerify(message *EncryptedMessage, recepient *KeyPair) (*Decrypted
 		return nil, err
 	}
 
-	text, err := decryptRaw(message.Cipher, recepient_entity)
+	text, err := decryptRaw(message.Content.Cipher, recepient_entity)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +83,7 @@ func DecryptAndVerify(message *EncryptedMessage, recepient *KeyPair) (*Decrypted
 	}
 
 	return &DecryptedMessage{
-		Text:              text,
-		SignatureVerified: signature_ok,
+		Text:        text,
+		SignatureOk: signature_ok,
 	}, nil
 }
