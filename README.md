@@ -4,6 +4,25 @@
 PGP library for iOS available through gomobile
 
 To use EasyPGP you would need to install gomobile tools, following [tutorial](https://github.com/golang/go/wiki/Mobile).
+You also need to patch gomobile to support `Uint64`:
+```patch
+diff --git a/bind/gen.go b/bind/gen.go
+index 546c5cf4..0428230f 100644
+--- a/bind/gen.go
++++ b/bind/gen.go
+@@ -232,7 +232,9 @@ func (g *Generator) cgoType(t types.Type) string {
+ 			return "int64_t"
+ 		case types.Uint8: // types.Byte
+ 			return "uint8_t"
+-		// TODO(crawshaw): case types.Uint, types.Uint16, types.Uint32, types.Uint64:
++		// TODO(c): case types.Uint, types.Uint16, types.Uint32:
++		case types.Uint64:
++			return "uint64_t"
+ 		case types.Float32:
+ 			return "float"
+ 		case types.Float64, types.UntypedFloat:
+```
+
 
 After that you can build `EasyPGP.framework`:
 
