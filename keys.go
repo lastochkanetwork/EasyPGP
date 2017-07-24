@@ -17,7 +17,7 @@ const nbits = 2048
 
 var packetConfig = &packet.Config{
 	DefaultHash:            crypto.SHA256,
-	DefaultCipher:          packet.CipherAES256,
+	DefaultCipher:          packet.CipherAES128,
 	DefaultCompressionAlgo: packet.CompressionZLIB,
 	CompressionConfig: &packet.CompressionConfig{
 		Level: 9,
