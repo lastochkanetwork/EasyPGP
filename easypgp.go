@@ -1,16 +1,5 @@
 package easypgp
 
-// type EncryptedMessage struct {
-// 	Cipher       string
-// 	Signature    string
-// 	SenderPubkey string
-// }
-
-// type DecryptedMessage struct {
-// 	Text              string
-// 	SignatureVerified bool
-// }
-
 type KeyPair struct {
 	Pubkey  string
 	Privkey string
@@ -21,6 +10,10 @@ func NewKeyPairWithKeys(pubkey string, privkey string) *KeyPair {
 		Pubkey:  pubkey,
 		Privkey: privkey,
 	}
+}
+
+func NewEmptyEncryptedMessage() *EncryptedMessage {
+	return &EncryptedMessage{Content: &CipherWithSignature{}}
 }
 
 func Encrypt(message string, recepient *KeyPair) (*EncryptedMessage, error) {
