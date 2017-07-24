@@ -15,7 +15,7 @@ index 546c5cf4..0428230f 100644
  		case types.Uint8: // types.Byte
  			return "uint8_t"
 -		// TODO(crawshaw): case types.Uint, types.Uint16, types.Uint32, types.Uint64:
-+		// TODO(c): case types.Uint, types.Uint16, types.Uint32:
++		// TODO(crawshaw): case types.Uint, types.Uint16, types.Uint32:
 +		case types.Uint64:
 +			return "uint64_t"
  		case types.Float32:
