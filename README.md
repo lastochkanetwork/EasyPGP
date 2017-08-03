@@ -28,7 +28,12 @@ After that you can build `EasyPGP.framework`:
 
 ```
 go get github.com/encryptedtimeline/easypgp
+
+# For iOS
 gomobile bind -target=ios -o EasyPGP.framework  github.com/encryptedtimeline/easypgp
+
+# For Android
+gomobile bind -target=android  github.com/encryptedtimeline/easypgp
 ```
 
 After adding `EasyPGP.framework` to your project you can straight-forward use it.
