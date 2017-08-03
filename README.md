@@ -1,7 +1,7 @@
 # EasyPGP
 <a href="https://godoc.org/github.com/EncryptedTimeline/EasyPGP"><img src="https://godoc.org/github.com/encryptedtimeline/easypgp?status.svg"></a>
 
-PGP library for iOS available through gomobile
+PGP library for iOS and Android available through gomobile
 
 To use EasyPGP you would need to install gomobile tools, following [tutorial](https://github.com/golang/go/wiki/Mobile).
 You also need to patch gomobile to support `Uint64`:
