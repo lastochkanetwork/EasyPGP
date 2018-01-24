@@ -16,13 +16,13 @@ func NewEmptyEncryptedMessage() *EncryptedMessage {
 	return &EncryptedMessage{Content: &CipherWithSignature{}}
 }
 
-func Encrypt(message string, recepient *KeyPair) (*EncryptedMessage, error) {
-	recepient_entity, err := createEntityFromKeyPair(recepient, false)
+func Encrypt(message string, recipient *KeyPair) (*EncryptedMessage, error) {
+	recipient_entity, err := createEntityFromKeyPair(recipient, false)
 	if err != nil {
 		return nil, err
 	}
 
-	cipher, err := encryptRaw(message, recepient_entity)
+	cipher, err := encryptRaw(message, recipient_entity)
 	if err != nil {
 		return nil, err
 	}
@@ -34,8 +34,8 @@ func Encrypt(message string, recepient *KeyPair) (*EncryptedMessage, error) {
 	}, nil
 }
 
-func EncryptAndSign(message string, recepient *KeyPair, sender *KeyPair) (*EncryptedMessage, error) {
-	recepient_entity, err := createEntityFromKeyPair(recepient, false)
+func EncryptAndSign(message string, recipient *KeyPair, sender *KeyPair) (*EncryptedMessage, error) {
+	recipient_entity, err := createEntityFromKeyPair(recipient, false)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ func EncryptAndSign(message string, recepient *KeyPair, sender *KeyPair) (*Encry
 		return nil, err
 	}
 
-	cipher, err := encryptRaw(message, recepient_entity)
+	cipher, err := encryptRaw(message, recipient_entity)
 	if err != nil {
 		return nil, err
 	}
@@ -63,13 +63,13 @@ func EncryptAndSign(message string, recepient *KeyPair, sender *KeyPair) (*Encry
 	}, nil
 }
 
-func Decrypt(cipher string, recepient *KeyPair) (string, error) {
-	recepient_entity, err := createEntityFromKeyPair(recepient, true)
+func Decrypt(cipher string, recipient *KeyPair) (string, error) {
+	recipient_entity, err := createEntityFromKeyPair(recipient, true)
 	if err != nil {
 		return "", err
 	}
 
-	text, err := decryptRaw(cipher, recepient_entity)
+	text, err := decryptRaw(cipher, recipient_entity)
 	if err != nil {
 		return "", err
 	}
@@ -77,13 +77,13 @@ func Decrypt(cipher string, recepient *KeyPair) (string, error) {
 	return text, nil
 }
 
-func DecryptAndVerify(message *EncryptedMessage, recepient *KeyPair) (*DecryptedMessage, error) {
-	recepient_entity, err := createEntityFromKeyPair(recepient, true)
+func DecryptAndVerify(message *EncryptedMessage, recipient *KeyPair) (*DecryptedMessage, error) {
+	recipient_entity, err := createEntityFromKeyPair(recipient, true)
 	if err != nil {
 		return nil, err
 	}
 
-	text, err := decryptRaw(message.Content.Cipher, recepient_entity)
+	text, err := decryptRaw(message.Content.Cipher, recipient_entity)
 	if err != nil {
 		return nil, err
 	}

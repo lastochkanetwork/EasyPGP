@@ -19,10 +19,10 @@ func checkError(err error, t *testing.T) {
 
 func TestEncryptDecrypt(t *testing.T) {
 	sender_keypair := &KeyPair{Pubkey: pubkey1, Privkey: privkey1}
-	recepient_keypair := &KeyPair{Pubkey: pubkey2}
-	recepient_keypair_with_privkey := &KeyPair{Pubkey: pubkey2, Privkey: privkey2}
+	recipient_keypair := &KeyPair{Pubkey: pubkey2}
+	recipient_keypair_with_privkey := &KeyPair{Pubkey: pubkey2, Privkey: privkey2}
 
-	enc_msg, err := EncryptAndSign(message, recepient_keypair, sender_keypair)
+	enc_msg, err := EncryptAndSign(message, recipient_keypair, sender_keypair)
 	checkError(err, t)
 
 	sig_ok, err := enc_msg.VerifySignature()
@@ -36,7 +36,7 @@ func TestEncryptDecrypt(t *testing.T) {
 		t.Fail()
 	}
 
-	decrypted, err := DecryptAndVerify(enc_msg, recepient_keypair_with_privkey)
+	decrypted, err := DecryptAndVerify(enc_msg, recipient_keypair_with_privkey)
 	checkError(err, t)
 
 	if decrypted.Text != message {
