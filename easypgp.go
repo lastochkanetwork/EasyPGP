@@ -98,3 +98,28 @@ func DecryptAndVerify(message *EncryptedMessage, recipient *KeyPair) (*Decrypted
 		SignatureOk: signature_ok,
 	}, nil
 }
+
+func Sign(message string, signer *KeyPair) (string, error) {
+	signer_entity, err := createEntityFromKeyPair(signer, true)
+	if err != nil {
+		return "", err
+	}
+
+	signature, err := createSignature(message, signer_entity)
+	if err != nil {
+		return "", err
+	}
+
+	return signature, nil
+}
+
+func Verify(message string, signature string, signer_pubkey string) (bool, error) {
+	msg := EncryptedMessage{
+		Content: &CipherWithSignature{
+			Cipher: message,
+			Signature: signature,
+		},
+	}
+
+	return msg.VerifySignatureAgainst(signer_pubkey)
+}

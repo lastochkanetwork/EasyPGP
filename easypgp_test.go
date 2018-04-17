@@ -49,4 +49,16 @@ func TestEncryptDecrypt(t *testing.T) {
 
 	_, err = GenerateKeyPair()
 	checkError(err, t)
+
+	signature, err := Sign(message, recipient_keypair_with_privkey)
+	checkError(err, t)
+	if signature == "" {
+		t.Fail()
+	}
+
+	verifier, err := Verify(message, signature, pubkey2)
+	checkError(err, t)
+	if !verifier {
+		t.Fail()
+	}
 }
