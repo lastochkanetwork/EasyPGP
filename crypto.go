@@ -123,7 +123,6 @@ func (msg EncryptedMessage) signaturePacket() (*packet.Signature, error) {
 	return sig, nil
 }
 
-
 func EncryptSymmetric(text, key string) (string, error) {
 	encryptionType := "LASTOCHKA SYMMETRIC"
 

@@ -116,7 +116,7 @@ func Sign(message string, signer *KeyPair) (string, error) {
 func Verify(message string, signature string, signer_pubkey string) (bool, error) {
 	msg := EncryptedMessage{
 		Content: &CipherWithSignature{
-			Cipher: message,
+			Cipher:    message,
 			Signature: signature,
 		},
 	}
