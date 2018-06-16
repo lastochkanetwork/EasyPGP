@@ -9,6 +9,7 @@ import (
 	"golang.org/x/crypto/openpgp/packet"
 	_ "golang.org/x/crypto/ripemd160"
 	"io"
+	"io/ioutil"
 )
 
 func createSignature(what_to_sign string, signing_entity *openpgp.Entity) (string, error) {
@@ -120,4 +121,56 @@ func (msg EncryptedMessage) signaturePacket() (*packet.Signature, error) {
 		return nil, errors.New("Invalid signature")
 	}
 	return sig, nil
+}
+
+
+func EncryptSymmetric(text, key string) (string, error) {
+	encryptionType := "LASTOCHKA SYMMETRIC"
+
+	encbuf := bytes.NewBuffer(nil)
+	w, err := armor.Encode(encbuf, encryptionType, nil)
+	if err != nil {
+		return "", err
+	}
+
+	plaintext, err := openpgp.SymmetricallyEncrypt(w, []byte(key), nil, nil)
+	if err != nil {
+		return "", err
+	}
+	message := []byte(text)
+	_, err = plaintext.Write(message)
+	if err != nil {
+		return "", err
+	}
+
+	plaintext.Close()
+	w.Close()
+	return encbuf.String(), nil
+}
+
+func DecryptSymmetric(cipher, key string) (string, error) {
+	decbuf := bytes.NewBuffer([]byte(cipher))
+	result, err := armor.Decode(decbuf)
+	if err != nil {
+		return "", err
+	}
+
+	md, err := openpgp.ReadMessage(
+		result.Body,
+		nil,
+		func(keys []openpgp.Key, symmetric bool) ([]byte, error) {
+			return []byte(key), nil
+		},
+		nil,
+	)
+
+	if err != nil {
+		return "", err
+	}
+
+	bytes, err := ioutil.ReadAll(md.UnverifiedBody)
+	if err != nil {
+		return "", err
+	}
+	return string(bytes), nil
 }

@@ -62,3 +62,18 @@ func TestEncryptDecrypt(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func TestSymmetric(t *testing.T) {
+	key := "hello"
+	text := "world"
+
+	cipher, err := EncryptSymmetric(text, key)
+	checkError(err, t)
+
+	decrypted, err := DecryptSymmetric(cipher, key)
+	checkError(err, t)
+
+	if decrypted != text {
+		t.Fail()
+	}
+}
