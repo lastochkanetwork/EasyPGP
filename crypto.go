@@ -2,8 +2,10 @@ package easypgp
 
 import (
 	"bytes"
+	"compress/gzip"
 	_ "crypto/sha256"
 	"errors"
+	"fmt"
 	"golang.org/x/crypto/openpgp"
 	"golang.org/x/crypto/openpgp/armor"
 	"golang.org/x/crypto/openpgp/packet"
@@ -124,7 +126,7 @@ func (msg EncryptedMessage) signaturePacket() (*packet.Signature, error) {
 }
 
 func EncryptSymmetric(text, key string) (string, error) {
-	encryptionType := "LASTOCHKA SYMMETRIC"
+	encryptionType := "SYMMETRICALLY ENCRYPTED"
 
 	encbuf := bytes.NewBuffer(nil)
 	w, err := armor.Encode(encbuf, encryptionType, nil)
@@ -136,14 +138,33 @@ func EncryptSymmetric(text, key string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	message := []byte(text)
-	_, err = plaintext.Write(message)
+
+	compressed, err := gzip.NewWriterLevel(plaintext, gzip.BestCompression)
 	if err != nil {
 		return "", err
 	}
 
-	plaintext.Close()
-	w.Close()
+	message := []byte(text)
+	_, err = compressed.Write(message)
+	if err != nil {
+		return "", fmt.Errorf("Compression error: %v", err)
+	}
+
+	err = compressed.Close()
+	if err != nil {
+		return "", fmt.Errorf("Compression error: %v", err)
+	}
+
+	err = plaintext.Close()
+	if err != nil {
+		return "", fmt.Errorf("Encryption error: %v", err)
+	}
+
+	err = w.Close()
+	if err != nil {
+		return "", fmt.Errorf("Armoring error: %v", err)
+	}
+
 	return encbuf.String(), nil
 }
 
@@ -167,9 +188,15 @@ func DecryptSymmetric(cipher, key string) (string, error) {
 		return "", err
 	}
 
-	bytes, err := ioutil.ReadAll(md.UnverifiedBody)
+	decompressionReader, err := gzip.NewReader(md.UnverifiedBody)
+	if err != nil {
+		return "", fmt.Errorf("Decompression error: %v", err)
+	}
+
+	resultBytes, err := ioutil.ReadAll(decompressionReader)
 	if err != nil {
 		return "", err
 	}
-	return string(bytes), nil
+
+	return string(resultBytes), nil
 }
