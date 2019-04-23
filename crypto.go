@@ -154,11 +154,17 @@ func DecryptSymmetric(cipher, key string) (string, error) {
 		return "", err
 	}
 
+	firstTime := true
 	md, err := openpgp.ReadMessage(
 		result.Body,
 		nil,
 		func(keys []openpgp.Key, symmetric bool) ([]byte, error) {
-			return []byte(key), nil
+			if firstTime {
+				firstTime = false
+				return []byte(key), nil
+			}
+
+			return nil, errors.New("Key already provided")
 		},
 		nil,
 	)

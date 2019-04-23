@@ -77,3 +77,16 @@ func TestSymmetric(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func TestSymmetricWrongKey(t *testing.T) {
+	key := "hello"
+	text := "world"
+
+	cipher, err := EncryptSymmetric(text, key)
+	checkError(err, t)
+
+	_, err = DecryptSymmetric(cipher, "asd")
+	if err == nil {
+		t.Fail()
+	}
+}
