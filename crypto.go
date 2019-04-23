@@ -183,9 +183,9 @@ func DecryptSymmetric(cipher, key string) (string, error) {
 			if firstTime {
 				firstTime = false
 				return []byte(key), nil
-			} else {
-				return nil, errors.New("Key already provided")
 			}
+
+			return nil, errors.New("Key already provided")
 		},
 		nil,
 	)
